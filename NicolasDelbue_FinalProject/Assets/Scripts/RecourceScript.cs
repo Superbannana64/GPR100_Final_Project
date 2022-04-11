@@ -4,9 +4,9 @@ using UnityEngine;
 
 static public class RecourceScript
 {
-    static private float foodAmount;
-    static private float heatAmount;
-    static private float healthAmount;
+    static private float foodAmount = 100;
+    static private float heatAmount = 100;
+    static private float healthAmount = 100;
 
     static public void SetFoodAmount(float food)
     {
@@ -20,5 +20,16 @@ static public class RecourceScript
     {
         healthAmount = health;
     }
-    //Make Some Getters for Canvas UI;
+    static public float GetFoodAmount()
+    {
+        return foodAmount;
+    }
+    static public float GetHeatAmount()
+    {
+        return heatAmount;
+    }
+    static public float GetHealthAmount()
+    {
+        return healthAmount;
+    }
 }
