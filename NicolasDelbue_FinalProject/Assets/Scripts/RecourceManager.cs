@@ -6,7 +6,7 @@ public class RecourceManager : MonoBehaviour
 {
     static private bool isHeat = false, notHungry = false; //Should get from other scripts;
     private bool justAte = false;
-    private float localHeat, localHungry;
+    private float localHeat, localHungry, localHealth;
     public float foodChange, heatChange, heatUp;
 
     // Start is called before the first frame update
@@ -21,8 +21,9 @@ public class RecourceManager : MonoBehaviour
     {
         HeatManagement();
         FoodManagement();
+        HealthManagement();
     }
-    void AteFood(float foodNum)
+    public void AteFood(float foodNum)
     {
         localHungry = RecourceScript.GetFoodAmount();
         localHungry += foodNum;
@@ -45,6 +46,7 @@ public class RecourceManager : MonoBehaviour
         localHungry = RecourceScript.GetFoodAmount();
         if(notHungry && justAte) //This runs after you eat some food so you dont immediately lose food after eating
         {
+            Debug.Log("Should only run once");
             StartCoroutine(StillNotHungry());//Theoretically will wait for 10 seconds before hunger goes down
         }
         else if(!notHungry && !justAte)
@@ -57,7 +59,7 @@ public class RecourceManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Else in FoodManagement"); //This will happen as the coroutine will still be running while after the first if statement
+            //This will happen as the coroutine will still be running while after the first if statement
         }
         RecourceScript.SetFoodAmount(localHungry);
     }
@@ -86,6 +88,26 @@ public class RecourceManager : MonoBehaviour
         }
         RecourceScript.SetHeatAmount(localHeat);
         //canvas update (maybe done in canvas update)
+    }
+    void HealthManagement()
+    {
+
+        if(localHeat <= 0 && localHungry > 0)
+        {
+            //Decrease health at a rate
+        }
+        else if(localHeat > 0 && localHungry <= 0)
+        {
+            //Decrease health as rate above
+        }
+        else if(localHeat <= 0 && localHungry <= 0)
+        {
+            //Decrease health at double the rate
+        }
+        else
+        {
+            //Not Decreasing Health
+        }
     }
     static public void SetIsHeat(bool heat)
     {

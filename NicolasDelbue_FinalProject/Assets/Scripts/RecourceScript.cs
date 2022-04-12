@@ -7,9 +7,11 @@ static public class RecourceScript
 {
     public static event Action<float> foodChange;
     public static event Action<float> heatChange;
+    public static event Action<float> moneyChange;
     static private float foodAmount = 100;
     static private float heatAmount = 100;
     static private float healthAmount = 100;
+    static private float moneyAmount = 3.00f;
 
     static public void SetFoodAmount(float food)
     {
@@ -25,6 +27,11 @@ static public class RecourceScript
     {
         healthAmount = health;
     }
+    static public void SetMoneyAmount(float money)
+    {
+        moneyAmount = money;
+        moneyChange?.Invoke(moneyAmount);
+    }
     static public float GetFoodAmount()
     {
         return foodAmount;
@@ -36,5 +43,9 @@ static public class RecourceScript
     static public float GetHealthAmount()
     {
         return healthAmount;
+    }
+    static public float GetMoneyAmount()
+    {
+        return moneyAmount;
     }
 }

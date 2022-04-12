@@ -6,14 +6,16 @@ using TMPro;
 public class CanvasUpdate : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI foodAmount, heatAmount;
+    [SerializeField] private TextMeshProUGUI foodAmount, heatAmount, healthAmount, moneyAmount;
     
     void OnEnable()
     {
         RecourceScript.foodChange += UpdateFoodUI;
         RecourceScript.heatChange += UpdateHeatUI;
+        RecourceScript.moneyChange += UpdateMoneyUI;
         UpdateHeatUI(RecourceScript.GetHeatAmount());
         UpdateFoodUI(RecourceScript.GetFoodAmount());
+        UpdateMoneyUI(RecourceScript.GetMoneyAmount());
     }
     void OnDisable()
     {
@@ -28,5 +30,14 @@ public class CanvasUpdate : MonoBehaviour
     {
         int local = (int)heatNumToText;
         heatAmount.text = ("Heat: "+local.ToString());
+    }
+    void UpdateHealthUI(float healthNumToText)
+    {
+        int local = (int)healthNumToText;
+        healthAmount.text = ("Health: "+local.ToString());
+    }
+    void UpdateMoneyUI(float moneyNumToText)
+    {
+        moneyAmount.text = ("Money: $"+moneyNumToText.ToString("#.00"));
     }
 }
