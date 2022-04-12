@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class RecourceManager : MonoBehaviour
 {
-    bool isHeat = true, notHungry = true; //Should get from other scripts;
+    static private bool isHeat = false, notHungry = false; //Should get from other scripts;
     private bool justAte = false;
-    float localHeat, localHungry;
+    private float localHeat, localHungry;
+    public float foodChange, heatChange, heatUp;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isHeat = false;
+        notHungry = false;
     }
 
     // Update is called once per frame
@@ -20,10 +22,10 @@ public class RecourceManager : MonoBehaviour
         HeatManagement();
         FoodManagement();
     }
-    void AteFood(float food)
+    void AteFood(float foodNum)
     {
         localHungry = RecourceScript.GetFoodAmount();
-        localHungry += food;
+        localHungry += foodNum;
         if(localHungry > 100)
         {
             localHungry = 100;
@@ -41,13 +43,13 @@ public class RecourceManager : MonoBehaviour
     void FoodManagement()
     {
         localHungry = RecourceScript.GetFoodAmount();
-        if(notHungry && !justAte) //This runs after you eat some food so you dont immediately lose food after eating
+        if(notHungry && justAte) //This runs after you eat some food so you dont immediately lose food after eating
         {
             StartCoroutine(StillNotHungry());//Theoretically will wait for 10 seconds before hunger goes down
         }
-        else if(!notHungry && justAte)
+        else if(!notHungry && !justAte)
         {
-            localHungry -= 0.001f;
+            localHungry -= foodChange;
             if(localHungry < 0)
             {
                 localHungry = 0;
@@ -57,13 +59,14 @@ public class RecourceManager : MonoBehaviour
         {
             Debug.Log("Else in FoodManagement"); //This will happen as the coroutine will still be running while after the first if statement
         }
+        RecourceScript.SetFoodAmount(localHungry);
     }
     void HeatManagement()
     {
         localHeat = RecourceScript.GetHeatAmount();
         if(isHeat)//If player is near heat source
         {
-            localHeat += 2;
+            localHeat += heatUp;
             if(localHeat > 100) //Local heat increases by 2 until 100
             {
                 localHeat = 100;
@@ -71,7 +74,7 @@ public class RecourceManager : MonoBehaviour
         }
         else if(!isHeat)//If player is not near heat
         {
-            localHeat -= 0.001f; //Heat will slowly go down over time
+            localHeat -= heatChange; //Heat will slowly go down over time
             if(localHeat < 0) //If heat at 0 will stay at 0
             {
                 localHeat = 0;
@@ -84,11 +87,11 @@ public class RecourceManager : MonoBehaviour
         RecourceScript.SetHeatAmount(localHeat);
         //canvas update (maybe done in canvas update)
     }
-    public void SetIsHeat(bool heat)
+    static public void SetIsHeat(bool heat)
     {
         isHeat = heat;
     }
-    public void SetNotHungry(bool hunger)
+    static public void SetNotHungry(bool hunger)
     {
         notHungry = hunger;
     }
