@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+
 
 public class CanvasUpdate : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI foodAmount, heatAmount, healthAmount, moneyAmount;
+    [SerializeField] private TextMeshProUGUI foodAmount, heatAmount, healthAmount, moneyAmount, timerAmount;
+    [SerializeField] private string textFormat;
     
     void OnEnable()
     {
         RecourceScript.foodChange += UpdateFoodUI;
         RecourceScript.heatChange += UpdateHeatUI;
         RecourceScript.moneyChange += UpdateMoneyUI;
+        Timer.timerChange+=UpdateTimerUI;
         UpdateHeatUI(RecourceScript.GetHeatAmount());
         UpdateFoodUI(RecourceScript.GetFoodAmount());
         UpdateMoneyUI(RecourceScript.GetMoneyAmount());
@@ -20,6 +24,21 @@ public class CanvasUpdate : MonoBehaviour
     void OnDisable()
     {
         RecourceScript.foodChange -= UpdateFoodUI;
+        RecourceScript.heatChange -= UpdateHeatUI;
+        RecourceScript.moneyChange -= UpdateMoneyUI;
+    }
+    void UpdateTimerUI(double timerNum)
+    {
+        TimeSpan time = TimeSpan.FromMinutes(timerNum);
+
+        if(time.Seconds < 10)
+        {
+            timerAmount.text = "Clock: " + textFormat/*in inspector*/ + time.Minutes.ToString() + ":0" + time.Seconds.ToString();
+        }
+        else
+        {
+            timerAmount.text = "Clock: " + textFormat/*in inspector*/ + time.Minutes.ToString() + ":" + time.Seconds.ToString();
+        }
     }
     void UpdateFoodUI(float foodNumToText) //Change to make it so it decreases a bar instead of output text
     {
