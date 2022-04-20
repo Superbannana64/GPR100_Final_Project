@@ -12,6 +12,33 @@ static public class RecourceScript
     static private float heatAmount = 100;
     static private float healthAmount = 100;
     static private float moneyAmount = 3.00f;
+    static private bool niceCloths = false;
+    static private bool suitOwn = false;
+    static public void ResetRecource()
+    {
+        foodAmount = 100;
+        heatAmount = 100;
+        healthAmount = 100;
+        moneyAmount = 3.00f;
+        niceCloths = false;
+        suitOwn = false;
+    }
+    static public void SetNiceCloths(bool cloths)
+    {
+        niceCloths = cloths;
+    }
+    static public void SetSuitOwn(bool cloths)
+    {
+        suitOwn = cloths;
+    }
+    static public bool GetNiceCloths()
+    {
+        return niceCloths;
+    }
+    static public bool GetSuitOwn()
+    {
+        return suitOwn;
+    }
 
     static public void SetFoodAmount(float food)
     {

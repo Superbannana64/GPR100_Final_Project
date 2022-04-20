@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyObjectTrigger : MonoBehaviour
+public class GainMoneyTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject EventSys;
-    public float objCost, foodAmountRefil;
+    public float objCost;
     private bool CanBuy = false;
     public bool needGoodCloths = false, needSuit = false;
     void Update()
@@ -44,15 +44,7 @@ public class BuyObjectTrigger : MonoBehaviour
     }
     void BuyObject()
     {
-        if(objCost > RecourceScript.GetMoneyAmount())
-        {
-            //Cant buy Show Text That Cant Buy
-        }
-        else
-        {
-            RecourceScript.SetMoneyAmount(RecourceScript.GetMoneyAmount()-objCost);
-            EventSys.GetComponent<RecourceManager>().AteFood(foodAmountRefil);
-        }
+        RecourceScript.SetMoneyAmount(RecourceScript.GetMoneyAmount()+objCost);
     }
     void OnTriggerEnter2D(Collider2D col)
     {

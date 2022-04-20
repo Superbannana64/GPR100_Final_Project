@@ -2,47 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyObjectTrigger : MonoBehaviour
+public class BuyClothsTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject EventSys;
-    public float objCost, foodAmountRefil;
+    public float objCost;
     private bool CanBuy = false;
     public bool needGoodCloths = false, needSuit = false;
     void Update()
     {
-        if(!needGoodCloths && !needSuit)
+        if(needGoodCloths)
         {
             if(CanBuy)
             {
                 if(Input.GetKeyUp(KeyCode.E))
                 {
-                    BuyObject();
-                }
-            }
-        }
-        else if(needGoodCloths)
-        {
-            if(CanBuy && RecourceScript.GetNiceCloths())
-            {
-                if(Input.GetKeyUp(KeyCode.E))
-                {
-                    BuyObject();
+                    BuyObjectNiceCloths();
                 }
             }
         }
         else if(needSuit)
         {
-            if(CanBuy && RecourceScript.GetSuitOwn())
+            if(CanBuy)
             {
                 if(Input.GetKeyUp(KeyCode.E))
                 {
-                    BuyObject();
+                    BuyObjectSuit();
                 }
             }
         }
         
     }
-    void BuyObject()
+    void BuyObjectNiceCloths()
     {
         if(objCost > RecourceScript.GetMoneyAmount())
         {
@@ -51,7 +40,19 @@ public class BuyObjectTrigger : MonoBehaviour
         else
         {
             RecourceScript.SetMoneyAmount(RecourceScript.GetMoneyAmount()-objCost);
-            EventSys.GetComponent<RecourceManager>().AteFood(foodAmountRefil);
+            RecourceScript.SetNiceCloths(true);
+        }
+    }
+    void BuyObjectSuit()
+    {
+        if(objCost > RecourceScript.GetMoneyAmount())
+        {
+            //Cant buy Show Text That Cant Buy
+        }
+        else
+        {
+            RecourceScript.SetMoneyAmount(RecourceScript.GetMoneyAmount()-objCost);
+            RecourceScript.SetSuitOwn(true);
         }
     }
     void OnTriggerEnter2D(Collider2D col)

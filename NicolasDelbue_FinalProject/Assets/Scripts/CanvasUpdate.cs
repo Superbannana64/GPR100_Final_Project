@@ -8,15 +8,16 @@ using System;
 public class CanvasUpdate : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI foodAmount, heatAmount, healthAmount, moneyAmount, timerAmount;
+    [SerializeField] private TextMeshProUGUI foodAmount, heatAmount, healthAmount, moneyAmount, timerAmount, dayNum;
     [SerializeField] private string textFormat;
-    
+    //Reminder, Make Food, Heat, And Health into bars that decrease
     void OnEnable()
     {
         RecourceScript.foodChange += UpdateFoodUI;
         RecourceScript.heatChange += UpdateHeatUI;
         RecourceScript.moneyChange += UpdateMoneyUI;
         Timer.timerChange+=UpdateTimerUI;
+        Timer.dayChange+=UpdateDayUI;
         UpdateHeatUI(RecourceScript.GetHeatAmount());
         UpdateFoodUI(RecourceScript.GetFoodAmount());
         UpdateMoneyUI(RecourceScript.GetMoneyAmount());
@@ -26,6 +27,12 @@ public class CanvasUpdate : MonoBehaviour
         RecourceScript.foodChange -= UpdateFoodUI;
         RecourceScript.heatChange -= UpdateHeatUI;
         RecourceScript.moneyChange -= UpdateMoneyUI;
+        Timer.timerChange-=UpdateTimerUI;
+        Timer.dayChange-=UpdateDayUI;
+    }
+    void UpdateDayUI(int day)
+    {
+        dayNum.text = ("Day: "+day.ToString());
     }
     void UpdateTimerUI(double timerNum)
     {

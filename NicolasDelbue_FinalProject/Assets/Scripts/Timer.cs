@@ -8,14 +8,30 @@ public class Timer : MonoBehaviour
     public static event Action<double> timerChange;
     public static event Action<int> dayChange;
     static private double timerNum = 0.0f;
-    static private int dayNum = 0;
-    public bool timerOff = true;
-    private double time;
-    private double min;
-    private double hour;
+    static private int dayNum = 1;
+    static public bool timerOff = true;
+    static private double time;
+    static private double min;
+    static private double hour;
+    static public void ResetTimer()
+    {
+        timerNum = 0.0f;
+        time = 0;
+        min = 0;
+        hour = 0;
+        dayNum = 1;
+    }
+    static public void TimerSwitch()
+    {
+        timerOff = !timerOff;
+    }
+    static public void SetTimer(bool timer)
+    {
+        timerOff = timer;
+    }
     void Start()
     {
-        
+        dayChange?.Invoke(dayNum);
     }
     void Update()
     {
@@ -29,12 +45,12 @@ public class Timer : MonoBehaviour
                 
             }
             double check = min/.59;
-            Debug.Log(check);
+            //Debug.Log(check);
             if(check >= 1)
             {
                 min = 0;
                 hour += 1;
-                Debug.Log("Workin");
+                //Debug.Log("Workin");
             }
 
             if(hour/24 >= 1)

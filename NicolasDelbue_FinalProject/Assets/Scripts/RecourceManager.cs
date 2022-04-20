@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class RecourceManager : MonoBehaviour
 {
-    static private bool isHeat = false, notHungry = false; //Should get from other scripts;
+    static private bool isHeat = false, notHungry = false, UpdateFood = true; //Should get from other scripts;
     private bool justAte = false;
     private float localHeat, localHungry, localHealth;
     public float foodChange, heatChange, heatUp;
 
+    static public void UpdateFoodSwitch()
+    {
+        UpdateFood = !UpdateFood;
+    }
+    static public void SetFoodSwitch(bool food)
+    {
+        UpdateFood = food;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +27,12 @@ public class RecourceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HeatManagement();
-        FoodManagement();
-        HealthManagement();
+        if(UpdateFood)
+        {
+            HeatManagement();
+            FoodManagement();
+            HealthManagement();
+        }
     }
     public void AteFood(float foodNum)
     {
