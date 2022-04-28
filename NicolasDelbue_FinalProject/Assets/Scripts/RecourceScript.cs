@@ -14,6 +14,7 @@ static public class RecourceScript
     static private float moneyAmount = 3.00f;
     static private bool niceCloths = false;
     static private bool suitOwn = false;
+    static private bool appartmentOwn = false;
     static public void ResetRecource()
     {
         foodAmount = 100;
@@ -22,6 +23,7 @@ static public class RecourceScript
         moneyAmount = 3.00f;
         niceCloths = false;
         suitOwn = false;
+        appartmentOwn = false;
     }
     static public void SetNiceCloths(bool cloths)
     {

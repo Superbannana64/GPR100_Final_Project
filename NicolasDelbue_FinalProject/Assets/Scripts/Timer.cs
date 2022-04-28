@@ -21,6 +21,10 @@ public class Timer : MonoBehaviour
         hour = 0;
         dayNum = 1;
     }
+    static public int GetDay()
+    {
+        return dayNum;
+    }
     static public void TimerSwitch()
     {
         timerOff = !timerOff;

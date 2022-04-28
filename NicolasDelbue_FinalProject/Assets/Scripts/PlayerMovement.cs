@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             if(col.gameObject.GetComponent<ShopInfo>().GetOpen())
             {
                 SaveLocation();
-                SceneManage.ChangeScene(2);
+                SceneManage.ChangeScene(col.gameObject.GetComponent<ShopInfo>().GetNum());
                 Debug.Log("Change To Shop");
             }
         }

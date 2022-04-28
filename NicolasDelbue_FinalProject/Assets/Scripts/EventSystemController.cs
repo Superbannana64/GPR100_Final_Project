@@ -39,6 +39,11 @@ public class EventSystemController : MonoBehaviour
                 test = !test;
             }
         }
+        if(RecourceScript.GetSuitOwn() && Timer.GetDay() == 2)
+        {
+            Debug.Log("YouWin");
+            ChangeSceneLeaveLevel(0);
+        }
     }
 
     //For Buttons
