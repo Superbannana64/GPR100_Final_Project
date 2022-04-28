@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(col.gameObject.GetComponent<ShopInfo>().GetOpen())
             {
-                SaveLocation();
+                SaveLocation(col.gameObject.GetComponent<ShopInfo>().GetEntrance());
                 SceneManage.ChangeScene(col.gameObject.GetComponent<ShopInfo>().GetNum());
                 Debug.Log("Change To Shop");
             }
@@ -58,11 +58,36 @@ public class PlayerMovement : MonoBehaviour
             SceneManage.ChangeScene(1);
         }
     }
-    void SaveLocation()
+    void SaveLocation(int entrance)
     {
-        PlayerPrefs.SetFloat("XPos", (gameObject.transform.position.x));
-        PlayerPrefs.SetFloat("YPos", (gameObject.transform.position.y - 0.5f));
-        PlayerPrefs.SetFloat("ZPos", (gameObject.transform.position.z));
-        PlayerPrefs.SetInt("Saved", 1);
+        switch(entrance)
+        {
+            case 0: //Top
+            PlayerPrefs.SetFloat("XPos", (gameObject.transform.position.x));
+            PlayerPrefs.SetFloat("YPos", (gameObject.transform.position.y + 0.5f));
+            PlayerPrefs.SetFloat("ZPos", (gameObject.transform.position.z));
+            PlayerPrefs.SetInt("Saved", 1);
+            break;
+            case 1: //Right
+            PlayerPrefs.SetFloat("XPos", (gameObject.transform.position.x + 0.5f));
+            PlayerPrefs.SetFloat("YPos", (gameObject.transform.position.y));
+            PlayerPrefs.SetFloat("ZPos", (gameObject.transform.position.z));
+            PlayerPrefs.SetInt("Saved", 1);
+            break;
+            case 2: //Bottom
+            PlayerPrefs.SetFloat("XPos", (gameObject.transform.position.x));
+            PlayerPrefs.SetFloat("YPos", (gameObject.transform.position.y - 0.5f));
+            PlayerPrefs.SetFloat("ZPos", (gameObject.transform.position.z));
+            PlayerPrefs.SetInt("Saved", 1);
+            break;
+            case 3: //Left
+            PlayerPrefs.SetFloat("XPos", (gameObject.transform.position.x - 0.5f));
+            PlayerPrefs.SetFloat("YPos", (gameObject.transform.position.y));
+            PlayerPrefs.SetFloat("ZPos", (gameObject.transform.position.z));
+            break;
+            default:
+
+            break;
+        }
     }
 }
