@@ -41,18 +41,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: Background
+    uniqueID: 3029500923
     locked: 0
   - name: Walls
     uniqueID: 1534609105
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Player
     uniqueID: 3607340617
     locked: 0
   - name: Particle
     uniqueID: 2302093465
-    locked: 0
-  - name: Background
-    uniqueID: 3029500923
     locked: 0
