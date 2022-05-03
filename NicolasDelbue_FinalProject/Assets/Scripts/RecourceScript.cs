@@ -8,13 +8,22 @@ static public class RecourceScript
     public static event Action<float> foodChange;
     public static event Action<float> heatChange;
     public static event Action<float> moneyChange;
-    static private float foodAmount = 100;
-    static private float heatAmount = 100;
-    static private float healthAmount = 100;
+    public static event Action<float> healthChange;
+    static private float foodAmount = 100f;
+    static private float heatAmount = 100f;
+    static private float healthAmount = 100f;
     static private float moneyAmount = 3.00f;
     static private bool niceCloths = false;
     static private bool suitOwn = false;
     static private bool appartmentOwn = false;
+    static public void SetAppartmentOwn(bool aps)
+    {
+        appartmentOwn = aps;
+    }
+    static public bool GetAppartmentOwn()
+    {
+        return appartmentOwn;
+    }
     static public void ResetRecource()
     {
         foodAmount = 100;
@@ -41,7 +50,6 @@ static public class RecourceScript
     {
         return suitOwn;
     }
-
     static public void SetFoodAmount(float food)
     {
         foodAmount = food;
@@ -55,6 +63,7 @@ static public class RecourceScript
     static public void SetHealthAmount(float health)
     {
         healthAmount = health;
+        healthChange?.Invoke(healthAmount);
     }
     static public void SetMoneyAmount(float money)
     {

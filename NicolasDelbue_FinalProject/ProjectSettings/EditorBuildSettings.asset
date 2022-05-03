@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 58aea3a393eaf3943a38a6391573ab85
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: fa2de532de2519449a1304b560825413
+  - enabled: 1
+    path: Assets/Scenes/Lose.unity
+    guid: 0818bf47567afb64d9d2e8769ac6a3d6
   - enabled: 0
     path: Assets/Scenes/TestingScene.unity
     guid: 5f525476fa236ae48ae71a16e76ac3a2

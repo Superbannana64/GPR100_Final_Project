@@ -39,10 +39,14 @@ public class EventSystemController : MonoBehaviour
                 test = !test;
             }
         }
-        if(RecourceScript.GetSuitOwn() && Timer.GetDay() == 2)
+        if(RecourceScript.GetAppartmentOwn() && Timer.GetDay() == 2)
         {
             Debug.Log("YouWin");
-            ChangeSceneLeaveLevel(0);
+            ChangeSceneLeaveLevel(1);
+        }
+        if(RecourceScript.GetHealthAmount() <= 0 || Timer.GetDay() >= 3)
+        {
+            ChangeSceneLeaveLevel(2);
         }
     }
 

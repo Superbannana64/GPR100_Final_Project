@@ -8,6 +8,7 @@ public class BuyObjectTrigger : MonoBehaviour
     public float objCost, foodAmountRefil;
     private bool CanBuy = false;
     public bool needGoodCloths = false, needSuit = false;
+    public AudioSource As;
     void Update()
     {
         if(!needGoodCloths && !needSuit)
@@ -52,6 +53,7 @@ public class BuyObjectTrigger : MonoBehaviour
         {
             RecourceScript.SetMoneyAmount(RecourceScript.GetMoneyAmount()-objCost);
             EventSys.GetComponent<RecourceManager>().AteFood(foodAmountRefil);
+            As.Play();
         }
     }
     void OnTriggerEnter2D(Collider2D col)

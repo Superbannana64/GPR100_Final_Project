@@ -102,18 +102,18 @@ public class RecourceManager : MonoBehaviour
     }
     void HealthManagement()
     {
-
+        localHealth = RecourceScript.GetHealthAmount();
         if(localHeat <= 0 && localHungry > 0)
         {
-            //Decrease health at a rate
+            RecourceScript.SetHealthAmount(localHealth-.5f);
         }
         else if(localHeat > 0 && localHungry <= 0)
         {
-            //Decrease health as rate above
+            RecourceScript.SetHealthAmount(localHealth-.5f);
         }
         else if(localHeat <= 0 && localHungry <= 0)
         {
-            //Decrease health at double the rate
+            RecourceScript.SetHealthAmount(localHealth-1f);
         }
         else
         {

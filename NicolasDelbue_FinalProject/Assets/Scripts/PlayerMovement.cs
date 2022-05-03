@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(col.CompareTag("ExitDoor"))
         {
-            SceneManage.ChangeScene(1);
+            SceneManage.ChangeScene(3);
         }
     }
     void SaveLocation(int entrance)
@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
             PlayerPrefs.SetFloat("XPos", (gameObject.transform.position.x - 0.5f));
             PlayerPrefs.SetFloat("YPos", (gameObject.transform.position.y));
             PlayerPrefs.SetFloat("ZPos", (gameObject.transform.position.z));
+            PlayerPrefs.SetInt("Saved", 1);
             break;
             default:
 

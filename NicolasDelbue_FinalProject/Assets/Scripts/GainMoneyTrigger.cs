@@ -8,6 +8,7 @@ public class GainMoneyTrigger : MonoBehaviour
     public float objCost;
     private bool CanBuy = false;
     public bool needGoodCloths = false, needSuit = false;
+    public AudioSource As;
     void Update()
     {
         if(!needGoodCloths && !needSuit)
@@ -45,6 +46,7 @@ public class GainMoneyTrigger : MonoBehaviour
     void BuyObject()
     {
         RecourceScript.SetMoneyAmount(RecourceScript.GetMoneyAmount()+objCost);
+        As.Play();
     }
     void OnTriggerEnter2D(Collider2D col)
     {

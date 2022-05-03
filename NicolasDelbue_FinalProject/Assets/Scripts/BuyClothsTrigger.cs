@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuyClothsTrigger : MonoBehaviour
 {
+    public AudioSource As;
     public float objCost;
     private bool CanBuy = false;
     public bool needGoodCloths = false, needSuit = false;
@@ -41,6 +42,7 @@ public class BuyClothsTrigger : MonoBehaviour
         {
             RecourceScript.SetMoneyAmount(RecourceScript.GetMoneyAmount()-objCost);
             RecourceScript.SetNiceCloths(true);
+            As.Play();
         }
     }
     void BuyObjectSuit()
@@ -53,6 +55,7 @@ public class BuyClothsTrigger : MonoBehaviour
         {
             RecourceScript.SetMoneyAmount(RecourceScript.GetMoneyAmount()-objCost);
             RecourceScript.SetSuitOwn(true);
+            As.Play();
         }
     }
     void OnTriggerEnter2D(Collider2D col)
